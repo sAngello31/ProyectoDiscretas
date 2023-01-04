@@ -4,31 +4,51 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyectodiscretas.SecondaryController">
-    <children>
-        <Label alignment="CENTER" text="Ingrese los jugadores">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyectodiscretas.SecondaryController">
+   <top>
+      <Label text="Ingrese los jugadores" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="23.0" />
-         </font></Label>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         </font>
+         <BorderPane.margin>
+            <Insets top="25.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <center>
+      <VBox fx:id="vboxGrande" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="25.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Jugador 1: " />
-            <TextField promptText="Ingrese un nombre" />
+            <HBox alignment="CENTER">
+               <children>
+                  <Label text="Jugador 1: " />
+                  <TextField />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label text="Jugador 2: " />
+                  <TextField />
+               </children>
+            </HBox>
          </children>
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      </VBox>
+   </center>
+   <bottom>
+      <VBox alignment="CENTER" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Jugador 2:  " />
-            <TextField promptText="Ingrese un nombre" />
+            <Button fx:id="btAgregar" mnemonicParsing="false" onAction="#agregarJugador" text="Agregar Jugador" />
+            <Button fx:id="btIniciar" mnemonicParsing="false" text="Iniciar" />
+            <Button fx:id="secondaryButton" mnemonicParsing="false" onAction="#switchToPrimary" text="Regresar" />
          </children>
-      </HBox>
-        <Button fx:id="secondaryButton" alignment="CENTER" onAction="#switchToPrimary" text="Switch to Primary View" />
-    </children>
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-</VBox>
+         <BorderPane.margin>
+            <Insets bottom="50.0" />
+         </BorderPane.margin>
+      </VBox>
+   </bottom>
+</BorderPane>

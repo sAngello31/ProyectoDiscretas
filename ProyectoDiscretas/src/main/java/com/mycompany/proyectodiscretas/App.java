@@ -20,10 +20,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("primary"), 900, 500);
         stage.setScene(scene);
         stage.setTitle("Árbol Discreto");
-        stage.setMinHeight(500);
-        stage.setMinWidth(900);
-        stage.setMaxHeight(500);
-        stage.setMaxWidth(900);
+        stage.setResizable(false);
         stage.show();
     }
 

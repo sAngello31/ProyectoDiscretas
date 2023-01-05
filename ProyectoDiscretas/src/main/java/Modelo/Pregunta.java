@@ -24,6 +24,9 @@ public class Pregunta {
         this.OPCIONES = OPCIONES;
         this.respuesta = respuesta;
     }
+    public Pregunta(){
+        this.OPCIONES=null;
+    }
 
     public String getId() {
         return id;

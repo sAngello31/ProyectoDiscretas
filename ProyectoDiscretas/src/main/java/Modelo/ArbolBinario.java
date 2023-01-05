@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class ArbolBinario<T> {
 
-    T[] arr;
+    public T[] arr;
     int ultimo;
     int capacidad;
     Comparator<T> comp;

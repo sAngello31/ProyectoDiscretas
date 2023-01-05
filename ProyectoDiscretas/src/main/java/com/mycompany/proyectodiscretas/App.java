@@ -1,6 +1,7 @@
 package com.mycompany.proyectodiscretas;
 
 import Modelo.Jugador;
+import Modelo.Pregunta;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,18 +10,25 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * JavaFX App
  */
 public class App extends Application {
-
     private static Scene scene;
+    public static ArrayList<ArrayList<Pregunta>> preguntas=new ArrayList<>();
     public static ArrayList<Jugador> listaJugadores = new ArrayList<>();
-
+    public static ArrayList<Pregunta> preguntasArte= new ArrayList<>();
+    public static ArrayList<Pregunta> preguntasHistoria= new ArrayList<>();
+    public static ArrayList<Pregunta> preguntasDeportes= new ArrayList<>();
+    public static ArrayList<Pregunta> preguntasEntretenimiento= new ArrayList<>();
+    public static ArrayList<Pregunta> preguntasCiencia= new ArrayList<>();
+    public static ArrayList<Pregunta> preguntasGeografia= new ArrayList<>();
+    
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 900, 500);
+        scene = new Scene(loadFXML("pregunta"), 900, 500);
         stage.setScene(scene);
         stage.setTitle("Árbol Discreto");
         stage.setResizable(false);

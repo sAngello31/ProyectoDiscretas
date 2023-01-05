@@ -1,5 +1,6 @@
 package com.mycompany.proyectodiscretas;
 
+import Modelo.Jugador;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -20,35 +21,34 @@ public class SecondaryController {
     private VBox vboxGrande;
     @FXML 
     private Button btIniciar;
-
-
-    
     @FXML
-    private void agregarJugador() throws IOException{
-        if(jugadores  == 4){
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setContentText("Solo se pueden agregar 4 jugadores maximos");
-            a.showAndWait();
-        }
-        
-        else{
-            System.out.println("Hola");
-            HBox jugador = new HBox(2);
-            Label titulo = new Label("Jugador " + (jugadores+1) + ":");
-            TextField tfJugador = new TextField();
-            
-            jugador.getChildren().add(titulo);
-            jugador.getChildren().add(tfJugador);
-            jugador.setAlignment(Pos.CENTER);
-            
-            vboxGrande.getChildren().add(jugador);
-            jugadores += 1;
-        }
-    }
+    private TextField jugador1;
+    @FXML
+    private TextField jugador2;
+    @FXML
+    private TextField jugador3;
+    @FXML
+    private TextField jugador4;
+
     
     @FXML
     private void iniciarJuego() throws IOException{
+        String nombreJ1 = jugador1.getText();
+        String nombreJ2 = jugador2.getText();
         
+        if(nombreJ1.equals("") || nombreJ2.equals("")){
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("Ingrese el nombre a todos los jugadores");
+            a.showAndWait();
+        }
+        else{
+            Jugador j1 = new Jugador(nombreJ1);
+            Jugador j2 = new Jugador(nombreJ2);
+            
+            App.listaJugadores.add(j1);
+            App.listaJugadores.add(j2);
+        }
+       
     }
 
     @FXML

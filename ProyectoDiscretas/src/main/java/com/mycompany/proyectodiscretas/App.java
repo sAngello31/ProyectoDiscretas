@@ -1,5 +1,6 @@
 package com.mycompany.proyectodiscretas;
 
+import Modelo.Jugador;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * JavaFX App
@@ -14,6 +16,7 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
+    public static ArrayList<Jugador> listaJugadores = new ArrayList<>();
 
     @Override
     public void start(Stage stage) throws IOException {

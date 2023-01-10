@@ -1,0 +1,10 @@
+41,¿Cuál es la capital de Filipinas?,Geografía,Quito,Manila,Pekín,Bangkok,1
+42,¿A qué país pertenece la isla de Creta?,Geografía,Italia,Japón,Ecuador,Grecia,3
+43,¿Qué país está entre Perú y Colombia?,Geografía,Argentina,Bolivia,Ecuador,Chile,2
+44,¿Entre qué países se encuentra el Estrecho de Bering?,Geografía,Ecuador y Perú,Japón y Corea del Sur,Rusia y Estados Unidos,Canadá y Estados Unidos,2
+45,¿Cuál es la lengua más hablada del mundo?,Geografía,Chino mandarín,Español,Inglés,Japonés,0
+46,¿Qué océano baña las aguas de Sri Lanka?,Geografía,Océano Pacífico,Océano Índico,Océano Atlántico,Océano Ártico,1
+47,¿En qué país de Europa se habla magyar?,Geografía,Hungría,España,Yugoslavia,Austria,0
+48,¿Cuál es el país más visitado del mundo?,Geografía,España,Estados Unidos,Alemania,Francia,3
+49,¿En qué países se encuentra el Everest?,Geografía,China y Nepal, Vietnam e Indonesia, India y Bangladesh,Suiza y Stalingrado,0
+50,¿Qué es la UA?,Geografía,Unión Austrohúngara,Unión Africana,Unión Americana,Unión Afroamericana,1

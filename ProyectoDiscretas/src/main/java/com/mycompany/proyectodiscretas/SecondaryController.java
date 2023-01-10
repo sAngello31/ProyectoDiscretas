@@ -4,19 +4,18 @@ import Modelo.Jugador;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class SecondaryController {
     
     int jugadores = 2;
-    
-    @FXML
-    private Button btAgregar;
     @FXML
     private VBox vboxGrande;
     @FXML 
@@ -25,10 +24,7 @@ public class SecondaryController {
     private TextField jugador1;
     @FXML
     private TextField jugador2;
-    @FXML
-    private TextField jugador3;
-    @FXML
-    private TextField jugador4;
+
 
     
     @FXML
@@ -47,10 +43,12 @@ public class SecondaryController {
             
             App.listaJugadores.add(j1);
             App.listaJugadores.add(j2);
+            Stage s=(Stage) vboxGrande.getScene().getWindow();
+            Scene scene=new Scene(App.loadFXML("Pregunta"),900,500);
+            s.setScene(scene);
         }
        
     }
-
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");

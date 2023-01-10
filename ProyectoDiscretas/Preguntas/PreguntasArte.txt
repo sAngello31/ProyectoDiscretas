@@ -1,0 +1,10 @@
+1,¿Cuál compositor de música clásica era zurdo?,Arte,Beethoven,Mozart,Sebastian Bach,Vivaldi,0
+2,¿Qué nota musical hay entre re y fa?,Arte,Do,Re,Mi,Fa,2
+3,¿Dónde se encontraba el cuadro "El Grito"?,Arte,España,Ecuador,Italia,Francia,3
+4,¿Quién pintó la obra mundialmente conocida con el nombre de "Mona Lisa" o "Gioconda"?,Arte,Leonardo Da Vinci,El Bosco,Miguel Ángel,Jan Van Eyck,0
+5,¿Quién escribió "El gato negro"?,Arte,Stephen King,Edgar Allan Poe,Pablo Palacios,Shakespeare,1
+6,¿Quién escribió "Orgullo y Prejuicio"?,Arte,Jane Austen,Gabriel García Márquez,Harper Lee,Emily Bronte,0
+7,Harry Potter fue escrita por...,Arte,Ana María Matute,Julio Cortázar,JK Rowling,Isabel Allende,2
+8,¿Quién escribió el ensayo feminista 'El segundo sexo'?,Arte,Simone de Beauvoir,JK Rowling,Isabel Allende,Juan Carlos Onetti,0
+9,¿Cómo despertó el príncipe a la Bella Durmiente?,Arte,Besándola,Con alarma,Pocion,Magia,0
+10,¿Quién fue el guía de Dante en la Divina Comedia?,Arte,Ciacco,Jacobo,Virgilio,San Bernardo,2

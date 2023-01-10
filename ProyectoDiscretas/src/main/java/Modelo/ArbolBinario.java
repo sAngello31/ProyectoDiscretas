@@ -4,6 +4,7 @@
  */
 package Modelo;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -18,23 +19,25 @@ public class ArbolBinario<T> {
     int ultimo;
     int capacidad;
     Comparator<T> comp;
+    Class<T> clazz;
 
-    public ArbolBinario(Comparator<T> comp) {
+    public ArbolBinario(Comparator<T> comp,Class<T> clazz) {
         this.comp = comp;
         ultimo = -1;
         arr = (T[]) new Object[10];
         capacidad = 10;
+        this.clazz=clazz;
     }
 
-    public ArbolBinario(Comparator<T> comp, int capacidad) {
+    public ArbolBinario(Comparator<T> comp, int capacidad,Class<T> clazz) {
         this.comp = comp;
         ultimo = -1;
-        arr = (T[]) new Object[capacidad];
+        arr = (T[]) Array.newInstance(clazz, capacidad);
         this.capacidad = capacidad;
     }
 
     private void crecerArreglo() {
-        T[] arregloTemp = (T[]) new Object[capacidad + 5];
+        T[] arregloTemp = (T[]) Array.newInstance(clazz, capacidad+5);
         for (int i = 0; i < capacidad; i++) {
             arregloTemp[i] = arr[i];
         }
@@ -138,23 +141,6 @@ public class ArbolBinario<T> {
             }
         }
     }
-
-    public static <E> List<E> Sort(List<E> lista, Comparator<E> comp) {
-        if (!lista.isEmpty()) {
-            ArbolBinario<E> tmp = new ArbolBinario(comp, lista.size());
-            List<E> retorno = new ArrayList<>();
-            for (E contenido : lista) {
-                tmp.encolar(contenido);
-            }
-            while (!tmp.isEmpty()) {
-                retorno.add(tmp.desencolar());
-            }
-            return retorno;
-        } else {
-            return lista;
-        }
-    }
-
     private void cambiarValores(int padre, int hijo) {
         T tmp = arr[padre];
         arr[padre] = arr[hijo];

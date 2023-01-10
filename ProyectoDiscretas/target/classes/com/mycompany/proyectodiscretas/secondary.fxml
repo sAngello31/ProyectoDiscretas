@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyectodiscretas.SecondaryController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyectodiscretas.SecondaryController">
    <top>
       <Label text="Ingrese los jugadores" BorderPane.alignment="CENTER">
          <font>
@@ -27,13 +26,13 @@
             <HBox alignment="CENTER">
                <children>
                   <Label text="Jugador 1: " />
-                  <TextField />
+                  <TextField fx:id="jugador1" />
                </children>
             </HBox>
             <HBox alignment="CENTER">
                <children>
                   <Label text="Jugador 2: " />
-                  <TextField />
+                  <TextField fx:id="jugador2" />
                </children>
             </HBox>
          </children>
@@ -42,8 +41,7 @@
    <bottom>
       <VBox alignment="CENTER" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btAgregar" mnemonicParsing="false" onAction="#agregarJugador" text="Agregar Jugador" />
-            <Button fx:id="btIniciar" mnemonicParsing="false" text="Iniciar" />
+            <Button fx:id="btIniciar" mnemonicParsing="false" onAction="#iniciarJuego" text="Iniciar" />
             <Button fx:id="secondaryButton" mnemonicParsing="false" onAction="#switchToPrimary" text="Regresar" />
          </children>
          <BorderPane.margin>

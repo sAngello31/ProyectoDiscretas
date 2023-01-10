@@ -13,10 +13,16 @@ import java.util.Iterator;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -24,7 +30,8 @@ import javafx.scene.layout.HBox;
  * @author DELL
  */
 public class PreguntaController implements Initializable {
-    
+    @FXML
+    private VBox vbRoot;
     @FXML
     private Button btn1;
     @FXML
@@ -48,6 +55,7 @@ public class PreguntaController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         llenarListaBotones();
         arbolJugador=crearArbol();
+        añadirEventHandlerBtn();
     }
 
     private void llenarListaBotones() {
@@ -73,11 +81,13 @@ public class PreguntaController implements Initializable {
         for (ArrayList<Pregunta> arrP : App.preguntas) {
             Collections.shuffle(arrP);
         }
-        for (int i = 0; i < 2; i++) {
+        if(!App.preguntas.isEmpty()){
+            for (int i = 0; i < 2; i++) {
             for (ArrayList<Pregunta> arrP : App.preguntas) {
                 arbol.encolar(arrP.get(i));
             }
             arbol.encolar(App.preguntas.get(i).get(2));
+        }
         }
         return arbol;
     }
@@ -88,9 +98,42 @@ public class PreguntaController implements Initializable {
     }
 
     private void añadirEventHandlerBtn() {
-        for(Button btn:botones){
-//            btn.setOnAction(eh);
+        for(int i=0;i<botones.size();i++){
+            Pregunta p=arbolJugador.arr[i];
+            botones.get(i).setOnAction(e->{
+                mostrarPregunta(p);
+            });
         }
     }
-
+    private Pane mostrarPregunta(Pregunta p){
+        Pane paneArbol=(Pane)vbRoot.getChildren().remove(vbRoot.getChildren().size()-1);
+        VBox root=new VBox();
+        HBox hbEnunciado=new HBox();
+        hbEnunciado.getChildren().add(new Label(p.getEnunciado()));
+        hbEnunciado.setAlignment(Pos.CENTER);
+        root.getChildren().add(hbEnunciado);
+        ToggleGroup tg=new ToggleGroup();
+        for(String op:p.getOPCIONES()){
+            HBox hbOp=new HBox();
+            RadioButton rb=new RadioButton();
+            tg.getToggles().add(rb);
+            hbOp.getChildren().addAll(rb,new Label(op));
+            hbOp.setPadding(new Insets(0,0,0,10));
+            hbOp.setSpacing(15);
+            root.getChildren().add(hbOp);
+        }
+        HBox hbBtnEnviar=new HBox();
+        Button btnEnviar=new Button("Enviar");
+        btnEnviar.setOnAction(e->{verificarRespuesta(p,tg);});
+        hbBtnEnviar.getChildren().add(btnEnviar);
+        return paneArbol;
+    }
+    private void verificarRespuesta(Pregunta pregunta,ToggleGroup tg){
+        RadioButton correcto=(RadioButton)tg.getToggles().get(pregunta.getRespuesta());
+        if(correcto.isSelected()){
+            System.out.println("Correcto");
+        }else{
+            System.out.println("Jaja, loquitop");
+        }
+    }
 }

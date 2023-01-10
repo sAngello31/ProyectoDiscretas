@@ -1,5 +1,6 @@
 package com.mycompany.proyectodiscretas;
 
+import Modelo.Categorias;
 import Modelo.Jugador;
 import Modelo.Pregunta;
 import javafx.application.Application;
@@ -28,7 +29,15 @@ public class App extends Application {
     
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("pregunta"), 900, 500);
+        ArrayList<String> opciones=new ArrayList<>();
+        opciones.add("2");
+        opciones.add("3");
+        opciones.add("1");
+        opciones.add("0");
+        
+        PreguntaRealizadaController.pregunta=new Pregunta("1","¿Cuánto es 1+1?",Categorias.Ciencia,opciones,0);
+        scene = new Scene(loadFXML("PreguntaRealizada"), 900, 500);
+
         stage.setScene(scene);
         stage.setTitle("Árbol Discreto");
         stage.setResizable(false);

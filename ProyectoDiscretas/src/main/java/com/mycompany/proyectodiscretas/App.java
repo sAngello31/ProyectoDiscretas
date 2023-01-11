@@ -38,7 +38,7 @@ public class App extends Application {
     
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("Pregunta"), 900, 500);
+        scene = new Scene(loadFXML("primary"), 900, 500);
         stage.setScene(scene);
         stage.setTitle("Árbol Discreto");
         stage.setResizable(false);
@@ -85,10 +85,10 @@ public class App extends Application {
         }
         return retorno;
     }
-    public static Image abrirImagen(String ruta){
+    public static Image abrirImagen(String ruta,double ancho,double alto){
         Image img=null;
         try(FileInputStream fi=new FileInputStream(ruta)){
-            img=new Image(fi);
+            img=new Image(fi, ancho, alto, false, true);
         }catch(FileNotFoundException f){
             f.printStackTrace();
         }catch(IOException ioex){

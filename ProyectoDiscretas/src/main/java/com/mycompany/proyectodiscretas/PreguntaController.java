@@ -26,6 +26,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -106,13 +107,14 @@ public class PreguntaController implements Initializable {
     }
     private void cargarImagenesBotones(){
         for(int i=0;i<14;i++){
-            System.out.println(App.PATHIMAGES+arbolJugador1.arr[i].getCategoria().name()+".png");
-            Image img1=App.abrirImagen(App.PATHIMAGES+arbolJugador1.arr[i].getCategoria().name()+".png");
-            Image img2=App.abrirImagen(App.PATHIMAGES+arbolJugador2.arr[i].getCategoria().name()+".png");
-            BackgroundImage bgImg1=new BackgroundImage(img1,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.DEFAULT,BackgroundSize.DEFAULT);
-            BackgroundImage bgImg2=new BackgroundImage(img2,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.DEFAULT,BackgroundSize.DEFAULT);
+            Image img1=App.abrirImagen(App.PATHIMAGES+arbolJugador1.arr[i].getCategoria().name()+".png",50,47.32);
+            Image img2=App.abrirImagen(App.PATHIMAGES+arbolJugador2.arr[i].getCategoria().name()+".png",50,47.32);
+            BackgroundImage bgImg1=new BackgroundImage(img1,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER,BackgroundSize.DEFAULT);
+            BackgroundImage bgImg2=new BackgroundImage(img2,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER,BackgroundSize.DEFAULT);
             Background bg=new Background(bgImg1);
 //            bg.getImages().add(bgImg2);
+//            String estilo=botones.get(i).getStyle();
+            botones.get(i).setStyle("");
             botones.get(i).setBackground(bg);
         }
     }

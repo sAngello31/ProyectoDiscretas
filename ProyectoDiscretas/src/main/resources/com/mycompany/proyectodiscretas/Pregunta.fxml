@@ -39,6 +39,12 @@
       </HBox>
       <Pane prefHeight="326.0" prefWidth="900.0">
          <children>
+            <HBox fx:id="hbB2" alignment="CENTER" layoutY="71.0" prefHeight="65.0" prefWidth="900.0" spacing="320.0">
+               <children>
+                  <Button fx:id="btn2" mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" style="-fx-background-radius: 75;" />
+                  <Button fx:id="btn3" mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" style="-fx-background-radius: 75;" />
+               </children>
+            </HBox>
             <Line endX="422.0" endY="35.5" startX="262.0" startY="77.0" stroke="RED" strokeWidth="2.5" />
             <Line endX="478.0" endY="35.5" fill="WHITE" startX="638.0" startY="77.0" stroke="RED" strokeWidth="2.5" />
             <Line endX="232.0" endY="109.0" startX="177.0" startY="149.0" stroke="RED" strokeWidth="2.5" />
@@ -56,12 +62,6 @@
             <HBox fx:id="hbB1" alignment="CENTER" prefHeight="71.0" prefWidth="900.0">
                <children>
                   <Button fx:id="btn1" mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" style="-fx-background-radius: 75;" />
-               </children>
-            </HBox>
-            <HBox fx:id="hbB2" alignment="CENTER" layoutY="71.0" prefHeight="65.0" prefWidth="900.0" spacing="320.0">
-               <children>
-                  <Button fx:id="btn2" mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" style="-fx-background-radius: 75;" />
-                  <Button fx:id="btn3" mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" style="-fx-background-radius: 75;" />
                </children>
             </HBox>
             <HBox fx:id="hbB3" alignment="CENTER" layoutY="140.0" prefHeight="71.0" prefWidth="900.0" spacing="135.0">

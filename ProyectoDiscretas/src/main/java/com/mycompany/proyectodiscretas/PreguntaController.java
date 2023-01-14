@@ -7,6 +7,7 @@ package com.mycompany.proyectodiscretas;
 import Modelo.ArbolBinario;
 import Modelo.Jugador;
 import Modelo.Pregunta;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +27,6 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -52,6 +52,8 @@ public class PreguntaController implements Initializable {
     private Label lblPlayer;
     @FXML
     private Label lblTiempo;
+    @FXML
+    private Pane arbol;
     @FXML
     private ArrayList<Button> botones;
     private Jugador jugadorActual;
@@ -124,44 +126,50 @@ public class PreguntaController implements Initializable {
             Pregunta p = arbolJugador1.arr[i];
             Pregunta p1 = arbolJugador2.arr[i];
             botones.get(i).setOnAction(e -> {
-                mostrarPregunta(p, p1);
+                try{
+                escogerPregunta();
+                }
+                
+                catch(IOException ex){
+                    System.out.println(ex.getMessage());
+                }
             });
         }
     }
 
-    private Pane mostrarPregunta(Pregunta p, Pregunta p2) {
-        Pane paneArbol = (Pane) vbRoot.getChildren().remove(vbRoot.getChildren().size() - 1);
-        VBox root = new VBox();
-        HBox hbEnunciado = new HBox();
-        hbEnunciado.getChildren().add(new Label(p.getEnunciado()));
-        hbEnunciado.setAlignment(Pos.CENTER);
-        root.getChildren().add(hbEnunciado);
-        ToggleGroup tg = new ToggleGroup();
-        Pregunta preguntaAMostrar;
-        if (turno % 2 == 0) {
-            preguntaAMostrar=p2;
-        } else {
-            preguntaAMostrar=p;
-        }
-        for (String op : preguntaAMostrar.getOPCIONES()) {
-            HBox hbOp = new HBox();
-            RadioButton rb = new RadioButton();
-            tg.getToggles().add(rb);
-            hbOp.getChildren().addAll(rb, new Label(op));
-            hbOp.setPadding(new Insets(0, 0, 0, 10));
-            hbOp.setSpacing(15);
-            root.getChildren().add(hbOp);
-        }
-        HBox hbBtnEnviar = new HBox();
-        Button btnEnviar = new Button("Enviar");
-        btnEnviar.setOnAction(e -> {
-            verificarRespuesta(preguntaAMostrar, tg);
-        });
-        hbBtnEnviar.getChildren().add(btnEnviar);
-        root.getChildren().add(hbBtnEnviar);
-        vbRoot.getChildren().add(root);
-        return paneArbol;
-    }
+//    private Pane mostrarPregunta(Pregunta p, Pregunta p2) {
+//        Pane paneArbol = (Pane) vbRoot.getChildren().remove(vbRoot.getChildren().size() - 1);
+//        VBox root = new VBox();
+//        HBox hbEnunciado = new HBox();
+//        hbEnunciado.getChildren().add(new Label(p.getEnunciado()));
+//        hbEnunciado.setAlignment(Pos.CENTER);
+//        root.getChildren().add(hbEnunciado);
+//        ToggleGroup tg = new ToggleGroup();
+//        Pregunta preguntaAMostrar;
+//        if (turno % 2 == 0) {
+//            preguntaAMostrar=p2;
+//        } else {
+//            preguntaAMostrar=p;
+//        }
+//        for (String op : preguntaAMostrar.getOPCIONES()) {
+//            HBox hbOp = new HBox();
+//            RadioButton rb = new RadioButton();
+//            tg.getToggles().add(rb);
+//            hbOp.getChildren().addAll(rb, new Label(op));
+//            hbOp.setPadding(new Insets(0, 0, 0, 10));
+//            hbOp.setSpacing(15);
+//            root.getChildren().add(hbOp);
+//        }
+//        HBox hbBtnEnviar = new HBox();
+//        Button btnEnviar = new Button("Enviar");
+//        btnEnviar.setOnAction(e -> {
+//            verificarRespuesta(preguntaAMostrar, tg);
+//        });
+//        hbBtnEnviar.getChildren().add(btnEnviar);
+//        root.getChildren().add(hbBtnEnviar);
+//        vbRoot.getChildren().add(root);
+//        return paneArbol;
+//    }
 
     private void verificarRespuesta(Pregunta pregunta, ToggleGroup tg) {
         RadioButton correcto = (RadioButton) tg.getToggles().get(pregunta.getRespuesta());
@@ -170,5 +178,11 @@ public class PreguntaController implements Initializable {
         } else {
             System.out.println("Jaja, loquitop");
         }
+    }
+    
+    @FXML
+    private void escogerPregunta() throws IOException {
+        arbol.getChildren().clear();
+        App.setRoot("PreguntaMostrada");
     }
 }

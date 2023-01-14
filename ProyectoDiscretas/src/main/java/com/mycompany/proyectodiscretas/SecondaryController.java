@@ -43,9 +43,11 @@ public class SecondaryController {
             
             App.listaJugadores.add(j1);
             App.listaJugadores.add(j2);
-            Stage s=(Stage) vboxGrande.getScene().getWindow();
-            Scene scene=new Scene(App.loadFXML("Pregunta"),900,500);
-            s.setScene(scene);
+            
+//            Stage s=(Stage) vboxGrande.getScene().getWindow();
+//            Scene scene=new Scene(App.loadFXML("Pregunta"),900,500);
+//            s.setScene(scene);
+            App.setRoot("Pregunta");
         }
        
     }

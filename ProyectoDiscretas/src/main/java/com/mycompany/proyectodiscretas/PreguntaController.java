@@ -13,14 +13,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -43,6 +40,10 @@ public class PreguntaController implements Initializable {
     @FXML
     private Button btn1;
     @FXML
+    public static Pane paneArbol1;
+    @FXML
+    public static Pane paneArbol2;
+    @FXML
     private HBox hbB2;
     @FXML
     private HBox hbB3;
@@ -57,16 +58,24 @@ public class PreguntaController implements Initializable {
     @FXML
     private ArrayList<Button> botones;
     private Jugador jugadorActual;
-    private ArbolBinario<Pregunta> arbolJugador1;
-    private ArbolBinario<Pregunta> arbolJugador2;
-    private int turno;
+    public static ArbolBinario<Pregunta> arbolJugador1;
+    public static ArbolBinario<Pregunta> arbolJugador2;
+    public static int turno = 1;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        turno = 1;
+        
+        if(!(turno%2 ==0)){
+            lblPlayer.setText("Jugador 1: " + App.listaJugadores.get(0).getUsername());
+        }
+        
+        else{
+            lblPlayer.setText("Jugador 1: " + App.listaJugadores.get(1).getUsername());
+        }
+        
         llenarListaBotones();
         arbolJugador1 = crearArbol();
         arbolJugador2 = crearArbol();
@@ -127,7 +136,7 @@ public class PreguntaController implements Initializable {
             Pregunta p1 = arbolJugador2.arr[i];
             botones.get(i).setOnAction(e -> {
                 try{
-                escogerPregunta();
+                escogerPregunta(p, p1);
                 }
                 
                 catch(IOException ex){
@@ -171,18 +180,30 @@ public class PreguntaController implements Initializable {
 //        return paneArbol;
 //    }
 
-    private void verificarRespuesta(Pregunta pregunta, ToggleGroup tg) {
-        RadioButton correcto = (RadioButton) tg.getToggles().get(pregunta.getRespuesta());
-        if (correcto.isSelected()) {
-            System.out.println("Correcto");
-        } else {
-            System.out.println("Jaja, loquitop");
-        }
+//    private void verificarRespuesta(Pregunta pregunta, ToggleGroup tg) {
+//        RadioButton correcto = (RadioButton) tg.getToggles().get(pregunta.getRespuesta());
+//        if (correcto.isSelected()) {
+//            System.out.println("Correcto");
+//        } else {
+//            System.out.println("Jaja, loquitop");
+//        }
+//    }
+    
+    private Pane obtenerArbolJugador(){
+        Pane p = (Pane) vbRoot.getChildren().remove(vbRoot.getChildren().size() - 1);
+        return p;
     }
     
     @FXML
-    private void escogerPregunta() throws IOException {
-        arbol.getChildren().clear();
-        App.setRoot("PreguntaMostrada");
+    private void escogerPregunta(Pregunta p1, Pregunta p2) throws IOException {
+        
+        FXMLLoader fxml = new FXMLLoader(App.class.getResource("PreguntaMostrada.fxml"));
+        PreguntaMostradaController ct = new PreguntaMostradaController();
+        fxml.setController(ct);
+        VBox root = (VBox)fxml.load();
+        
+        ct.llenarDatos(p1, p2);
+        ct.mostrarPreguntas(p1,  p2);
+        App.changeRoot(root);
     }
 }

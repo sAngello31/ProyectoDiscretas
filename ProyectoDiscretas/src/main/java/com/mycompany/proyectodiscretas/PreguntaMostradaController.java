@@ -4,12 +4,16 @@
  */
 package com.mycompany.proyectodiscretas;
 
+import Modelo.Pregunta;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 
 /**
  *
@@ -21,6 +25,10 @@ public class PreguntaMostradaController implements Initializable{
     private Label lblJugador;
     @FXML
     private Label lblTemporizador;
+    @FXML
+    private Label lblPregunta;
+    @FXML
+    private GridPane Angello;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -28,6 +36,44 @@ public class PreguntaMostradaController implements Initializable{
         t.setDaemon(true);
         t.start();
     }
+    
+    
+    public void llenarDatos(Pregunta p1, Pregunta p2){
+        if(!(PreguntaController.turno%2 == 0)){
+            lblJugador.setText(App.listaJugadores.get(0).getUsername());
+            lblPregunta.setText(p1.getEnunciado());
+        }
+        
+        else{
+            lblJugador.setText(App.listaJugadores.get(1).getUsername());
+            lblPregunta.setText(p2.getEnunciado());
+        }
+    }
+    
+    public void mostrarPreguntas(Pregunta p1, Pregunta p2) {        
+//        Pregunta preguntaAMostrar;
+//        if (turno % 2 == 0) {
+//            preguntaAMostrar=p2;
+//        } else {
+//            preguntaAMostrar=p1;
+//        }
+//        
+        int contador=0;
+        for(Node node: Angello.getChildren()){
+            Button bt = (Button)node;
+            bt.setText(p1.getOPCIONES().get(contador));                  
+            //Agregar el evento
+            bt.setOnAction(e -> {
+                if(bt.getText().equals(p1.getOPCIONES().get(p1.getRespuesta()))){
+                    System.out.println("RESPUESTA CORRECTA");
+                }else{
+                    System.out.println("PUTAAAAAAAAAAAAAAA");
+                }
+            });
+            contador++;
+        }
+    }
+    
     
     
     private class Temporizador extends Thread{

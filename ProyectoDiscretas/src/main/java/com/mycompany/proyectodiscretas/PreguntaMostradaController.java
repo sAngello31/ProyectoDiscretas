@@ -11,6 +11,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -65,9 +66,20 @@ public class PreguntaMostradaController implements Initializable{
             //Agregar el evento
             bt.setOnAction(e -> {
                 if(bt.getText().equals(p1.getOPCIONES().get(p1.getRespuesta()))){
+                    bt.setStyle("-fx-background-color: green; -fx-text-fill: white");
+                    Alert correcto=new Alert(Alert.AlertType.ERROR);
+                    correcto.setHeaderText("FELICIDADES ACERTASTE");
+                    correcto.setTitle("RESPUESTA CORRECTA");
+                    correcto.showAndWait();
                     System.out.println("RESPUESTA CORRECTA");
                 }else{
+                    bt.setStyle("-fx-background-color: red; -fx-text-fill: white");
+                    Alert incorrecto=new Alert(Alert.AlertType.ERROR);
+                    incorrecto.setHeaderText("VALISTE");
+                    incorrecto.setTitle("RESPUESTA INCORRECTA");
+                    incorrecto.showAndWait();
                     System.out.println("PUTAAAAAAAAAAAAAAA");
+                    
                 }
             });
             contador++;

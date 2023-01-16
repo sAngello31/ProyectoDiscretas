@@ -58,8 +58,10 @@ public class PreguntaController implements Initializable {
     @FXML
     private ArrayList<Button> botones;
     private Jugador jugadorActual;
-    public static ArbolBinario<Pregunta> arbolJugador1;
-    public static ArbolBinario<Pregunta> arbolJugador2;
+    public static ArbolBinario<Pregunta> arbolJugador1 = crearArbol();
+    public static ArbolBinario<Pregunta> arbolJugador2 = crearArbol();
+    
+    
     public static int turno = 1;
 
     /**
@@ -73,12 +75,10 @@ public class PreguntaController implements Initializable {
         }
         
         else{
-            lblPlayer.setText("Jugador 1: " + App.listaJugadores.get(1).getUsername());
+            lblPlayer.setText("Jugador 2: " + App.listaJugadores.get(1).getUsername());
         }
         
         llenarListaBotones();
-        arbolJugador1 = crearArbol();
-        arbolJugador2 = crearArbol();
         cargarImagenesBotones();
         añadirEventHandlerBtn();
     }
@@ -98,7 +98,7 @@ public class PreguntaController implements Initializable {
         botones = btns;
     }
 
-    private ArbolBinario<Pregunta> crearArbol() {
+    private static ArbolBinario<Pregunta> crearArbol() {
         ArbolBinario<Pregunta> arbol = new ArbolBinario((p1, p2) -> {
             return 0;
         },Pregunta.class);
@@ -117,14 +117,22 @@ public class PreguntaController implements Initializable {
         return arbol;
     }
     private void cargarImagenesBotones(){
+        
+        ArbolBinario<Pregunta> ab;
+        
+        if(!(turno %2 == 0)){
+            ab = arbolJugador1;
+            
+        }
+        
+        else{
+            ab = arbolJugador2;
+        }
+        
         for(int i=0;i<14;i++){
-            Image img1=App.abrirImagen(App.PATHIMAGES+arbolJugador1.arr[i].getCategoria().name()+".png",50,47.32);
-            Image img2=App.abrirImagen(App.PATHIMAGES+arbolJugador2.arr[i].getCategoria().name()+".png",50,47.32);
+            Image img1=App.abrirImagen(App.PATHIMAGES+ab.arr[i].getCategoria().name()+".png",50,47.32);
             BackgroundImage bgImg1=new BackgroundImage(img1,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER,BackgroundSize.DEFAULT);
-            BackgroundImage bgImg2=new BackgroundImage(img2,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER,BackgroundSize.DEFAULT);
             Background bg=new Background(bgImg1);
-//            bg.getImages().add(bgImg2);
-//            String estilo=botones.get(i).getStyle();
             botones.get(i).setStyle("");
             botones.get(i).setBackground(bg);
         }

@@ -5,6 +5,7 @@
 package com.mycompany.proyectodiscretas;
 
 import Modelo.Pregunta;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -30,10 +31,12 @@ public class PreguntaMostradaController implements Initializable{
     private Label lblPregunta;
     @FXML
     private GridPane Angello;
-
+    
+    Temporizador t;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Temporizador t = new Temporizador(lblTemporizador);
+        t = new Temporizador(lblTemporizador);
         t.setDaemon(true);
         t.start();
     }
@@ -62,32 +65,77 @@ public class PreguntaMostradaController implements Initializable{
         int contador=0;
         for(Node node: Angello.getChildren()){
             Button bt = (Button)node;
-            bt.setText(p1.getOPCIONES().get(contador));                  
+            if(!(PreguntaController.turno%2 ==0)){
+                bt.setText(p1.getOPCIONES().get(contador));  
+            }
+            
+            else{
+                bt.setText(p2.getOPCIONES().get(contador));  
+            }
+                            
             //Agregar el evento
-            bt.setOnAction(e -> {
-                if(bt.getText().equals(p1.getOPCIONES().get(p1.getRespuesta()))){
-                    bt.setStyle("-fx-background-color: green; -fx-text-fill: white");
-                    Alert correcto=new Alert(Alert.AlertType.ERROR);
-                    correcto.setHeaderText("FELICIDADES ACERTASTE");
-                    correcto.setTitle("RESPUESTA CORRECTA");
-                    correcto.showAndWait();
-                    System.out.println("RESPUESTA CORRECTA");
-                }else{
-                    bt.setStyle("-fx-background-color: red; -fx-text-fill: white");
-                    Alert incorrecto=new Alert(Alert.AlertType.ERROR);
-                    incorrecto.setHeaderText("VALISTE");
-                    incorrecto.setTitle("RESPUESTA INCORRECTA");
-                    incorrecto.showAndWait();
-                    System.out.println("PUTAAAAAAAAAAAAAAA");
-                    
-                }
-            });
+            bt.setOnAction(e -> verificarRespuesta(p1, bt));
             contador++;
         }
     }
     
+    private void verificarRespuesta(Pregunta p, Button bt){
+        if(bt.getText().equals(p.getOPCIONES().get(p.getRespuesta()))){
+            t.setIniciar(false);
+            bt.setStyle("-fx-background-color: green; -fx-text-fill: white");
+            Alert correcto=new Alert(Alert.AlertType.ERROR);
+            correcto.setHeaderText("FELICIDADES ACERTASTE");
+            correcto.setTitle("RESPUESTA CORRECTA");
+            correcto.showAndWait();
+            System.out.println("RESPUESTA CORRECTA");
+            //Cambio de Ventana y Turno 
+            PreguntaController.turno++;
+            try{
+                cambiarScene();
+            }
+            catch(IOException e){
+                System.out.println(e.getMessage());
+            }
+            
+        }
+        
+        else{
+            t.setIniciar(false);
+            bt.setStyle("-fx-background-color: red; -fx-text-fill: white");
+            Alert incorrecto=new Alert(Alert.AlertType.ERROR);
+            incorrecto.setHeaderText("VALISTE");
+            incorrecto.setTitle("RESPUESTA INCORRECTA");
+            incorrecto.showAndWait();
+            System.out.println("PUTAAAAAAAAAAAAAAA");
+                    
+            //Cambio de Ventana y Turno
+            PreguntaController.turno++;
+            try{
+                cambiarScene();
+            }
+            catch(IOException e){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
     
+    public void temporizadorFinalizado(){
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setHeaderText("SE TE ACABÓ EL TIEMPO");
+        a.showAndWait();
+        try{
+            cambiarScene();
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
     
+    private void cambiarScene() throws IOException{
+        App.setRoot("Pregunta");
+    }
+    
+    //Hilo
     private class Temporizador extends Thread{
         boolean iniciar = true;
         int segundos = 15;
@@ -123,11 +171,13 @@ public class PreguntaMostradaController implements Initializable{
                 System.out.println(segundos);
             }
             else{
-                System.out.println("Acabo tu turno bitch");
+                PreguntaController.turno++;
                 iniciar = false;
+                Platform.runLater(() -> temporizadorFinalizado());
             }
             
-        }   
+        }
+        
     }
     
 }

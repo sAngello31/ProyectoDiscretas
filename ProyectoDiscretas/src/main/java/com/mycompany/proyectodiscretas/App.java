@@ -29,6 +29,7 @@ public class App extends Application {
     private static Scene scene;
     public static ArrayList<ArrayList<Pregunta>> preguntas=llenarListaPreguntas();
     public static ArrayList<Jugador> listaJugadores = new ArrayList<>();
+    public static int turno=1;
 //    public static ArrayList<Pregunta> preguntasArte=cargarPreguntas(PATHFILES+"PreguntasArte.txt");
 //    public static ArrayList<Pregunta> preguntasHistoria=cargarPreguntas(PATHFILES+"PreguntasCiencia.txt");
 //    public static ArrayList<Pregunta> preguntasDeportes=cargarPreguntas(PATHFILES+"PreguntasDeportes.txt");
@@ -52,7 +53,7 @@ public class App extends Application {
     public static void changeRoot(Parent noodRoot){
         scene.setRoot(noodRoot);
     }
-
+    
     public static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();

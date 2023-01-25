@@ -7,19 +7,18 @@ package com.mycompany.proyectodiscretas;
 import Modelo.ArbolBinario;
 import Modelo.Jugador;
 import Modelo.Pregunta;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -38,7 +37,7 @@ import javafx.stage.Stage;
  *
  * @author DELL
  */
-public class PreguntaController implements Initializable {
+public class PreguntaController1 implements Initializable {
 
     @FXML
     private VBox vbRoot;
@@ -49,11 +48,11 @@ public class PreguntaController implements Initializable {
     @FXML
     public static Pane paneArbol2;
     @FXML
-    private HBox hbB2;
+    private HBox hbB22;
     @FXML
-    private HBox hbB3;
+    private HBox hbB23;
     @FXML
-    private HBox hbB4;
+    private HBox hbB24;
     @FXML
     private Label lblPlayer;
     @FXML
@@ -61,41 +60,40 @@ public class PreguntaController implements Initializable {
     @FXML
     private Pane arbol;
     @FXML
-    private static ArrayList<Button> botones;
-    private Jugador jugador1;
-    public static ArbolBinario<Pregunta> arbolJugador1;
-
-    public static Pane escenaJ1;
+    private static ArrayList<Button> botoneseste;
+    private Jugador jugador2;
+    public static ArbolBinario<Pregunta> arbolJugador2;
+    public static Pane escenaJ2;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        arbolJugador1 = crearArbol();
+        arbolJugador2 = crearArbol();
         llenarListaBotones();
         cargarImagenesBotones();
         añadirEventHandlerBtn();
         for (int i = 0; i < 2; i++) {
-            arbolJugador1.arr[i].setDisponible(true);
+            arbolJugador2.arr[i].setDisponible(true);
         }
         bloquearBotones();
-        lblPlayer.setText("Jugador 1: " + App.listaJugadores.get(0).getUsername());
+        lblPlayer.setText("Jugador 2: " + App.listaJugadores.get(1).getUsername());
     }
 
     private void llenarListaBotones() {
         ArrayList<Button> btns = new ArrayList<>();
         ArrayList<HBox> hboxes = new ArrayList<>();
-        hboxes.add(hbB2);
-        hboxes.add(hbB3);
-        hboxes.add(hbB4);
+        hboxes.add(hbB22);
+        hboxes.add(hbB23);
+        hboxes.add(hbB24);
         for (HBox h : hboxes) {
             for (Node n : h.getChildren()) {
                 Button btn = (Button) n;
                 btns.add(btn);
             }
         }
-        botones = btns;
+        botoneseste = btns;
     }
 
     private static ArbolBinario<Pregunta> crearArbol() {
@@ -109,33 +107,29 @@ public class PreguntaController implements Initializable {
         if (!App.preguntas.isEmpty()) {
             for (int i = 0; i < 2; i++) {
                 for (ArrayList<Pregunta> arrP : App.preguntas) {
-                    Iterator<Pregunta> it = arrP.iterator();
-                    arbol.encolar(it.next());
-                    it.remove();
+                    arbol.encolar(arrP.get(i));
                 }
-                Iterator<Pregunta> it = App.preguntas.get(i).iterator();
-                arbol.encolar(it.next());
-                it.remove();
+                arbol.encolar(App.preguntas.get(i).get(2));
             }
         }
         return arbol;
-
     }
 
     private void cargarImagenesBotones() {
+
         for (int i = 0; i < 14; i++) {
-            Image img1 = App.abrirImagen(App.PATHIMAGES + arbolJugador1.arr[i].getCategoria().name() + ".png", 50, 47.32);
+            Image img1 = App.abrirImagen(App.PATHIMAGES + arbolJugador2.arr[i].getCategoria().name() + ".png", 50, 47.32);
             BackgroundImage bgImg1 = new BackgroundImage(img1, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
             Background bg = new Background(bgImg1);
-            botones.get(i).setStyle("");
-            botones.get(i).setBackground(bg);
+            botoneseste.get(i).setStyle("");
+            botoneseste.get(i).setBackground(bg);
         }
     }
 
     private void añadirEventHandlerBtn() {
-        for (int i = 0; i < botones.size(); i++) {
-            Pregunta p = arbolJugador1.arr[i];
-            botones.get(i).setOnAction(e -> {
+        for (int i = 0; i < 14; i++) {
+            Pregunta p = arbolJugador2.arr[i];
+            botoneseste.get(i).setOnAction(e -> {
                 try {
                     escogerPregunta(p);
                 } catch (IOException ex) {
@@ -163,7 +157,7 @@ public class PreguntaController implements Initializable {
     }
 
     public static void cambiarEstadoPreguntas(Pregunta p, boolean bloqueo) {
-        Pregunta[] preguntas = arbolJugador1.arr;
+        Pregunta[] preguntas = arbolJugador2.arr;
         int indice = -1;
         for (int i = 0; i < preguntas.length; i++) {
             System.out.println("while");
@@ -197,10 +191,10 @@ public class PreguntaController implements Initializable {
 
     public static void bloquearBotones() {
         for (int i = 0; i < 14; i++) {
-            if (!arbolJugador1.arr[i].isDisponible()) {
-                botones.get(i).setDisable(true);
+            if (!arbolJugador2.arr[i].isDisponible()) {
+                botoneseste.get(i).setDisable(true);
             } else {
-                botones.get(i).setDisable(false);
+                botoneseste.get(i).setDisable(false);
             }
         }
     }

@@ -5,6 +5,7 @@
 package Modelo;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  *
@@ -16,6 +17,7 @@ public class Pregunta {
     private Categorias categoria;
     private final ArrayList<String> OPCIONES;
     private int respuesta;
+    private boolean disponible;
 
     public Pregunta(String id, String enunciado, Categorias categoria, ArrayList<String> OPCIONES, int respuesta) {
         this.id = id;
@@ -23,6 +25,7 @@ public class Pregunta {
         this.categoria = categoria;
         this.OPCIONES = OPCIONES;
         this.respuesta = respuesta;
+        disponible=false;
     }
     public Pregunta(){
         this.OPCIONES=null;
@@ -63,7 +66,34 @@ public class Pregunta {
     public ArrayList<String> getOPCIONES() {
         return OPCIONES;
     }
-    
-    
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pregunta other = (Pregunta) obj;
+        return Objects.equals(this.id, other.id);
+    }
     
 }

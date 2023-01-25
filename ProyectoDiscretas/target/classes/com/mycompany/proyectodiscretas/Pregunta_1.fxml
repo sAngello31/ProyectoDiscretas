@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="vbRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyectodiscretas.PreguntaController1">
+   <children>
+      <HBox prefHeight="66.0" prefWidth="900.0" spacing="389.0">
+         <children>
+            <Label fx:id="lblPlayer" prefHeight="18.0" prefWidth="305.0" text="Jugador">
+               <font>
+                  <Font name="DejaVu Sans Mono" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTiempo" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="176.0" text="Tiempo:" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Verdana Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="111.0" prefWidth="900.0" spacing="20.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="71.0" prefWidth="462.0" text="Seleccionar categoria" textAlignment="CENTER" textFill="#bae9eb">
+               <font>
+                  <Font name="System Bold" size="35.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <Pane prefHeight="326.0" prefWidth="900.0">
+         <children>
+            <HBox fx:id="hbB22" alignment="CENTER" layoutY="71.0" prefHeight="65.0" prefWidth="900.0" spacing="320.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" style="-fx-background-radius: 75;" />
+                  <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" style="-fx-background-radius: 75;" />
+               </children>
+            </HBox>
+            <Line endX="422.0" endY="35.5" startX="262.0" startY="77.0" stroke="RED" strokeWidth="2.5" />
+            <Line endX="478.0" endY="35.5" fill="WHITE" startX="638.0" startY="77.0" stroke="RED" strokeWidth="2.5" />
+            <Line endX="232.0" endY="109.0" startX="177.0" startY="149.0" stroke="RED" strokeWidth="2.5" />
+            <Line endX="280.0" endY="93.5" layoutX="10.0" layoutY="10.0" startX="346.0" startY="149.0" stroke="RED" strokeWidth="2.5" />
+            <Line endX="612.0" endY="104.0" startX="543.0" startY="149.0" stroke="RED" strokeWidth="2.5" />
+            <Line endX="112.0" endY="233.0" startX="143.0" startY="181.0" stroke="RED" strokeWidth="2.5" />
+            <Line endX="192.0" endY="175.5" startX="210.0" startY="233.0" stroke="RED" strokeWidth="2.5" />
+            <Line endX="327.0" endY="179.0" startX="304.0" startY="235.0" stroke="RED" strokeWidth="2.5" />
+            <Line endX="383.0" endY="175.5" startX="402.0" startY="233.0" stroke="RED" strokeWidth="2.5" />
+            <Line endX="518.0" endY="175.5" startX="498.0" startY="233.0" stroke="RED" strokeWidth="2.5" />
+            <Line endX="574.0" endY="175.5" startX="594.0" startY="233.0" stroke="RED" strokeWidth="2.5" />
+            <Line endX="709.0" endY="175.5" startX="690.0" startY="233.0" stroke="RED" strokeWidth="2.5" />
+            <Line endX="765.0" endY="171.0" startX="786.0" startY="233.0" stroke="RED" strokeWidth="2.5" />
+            <Line endX="668.0" endY="102.0" startX="729.0" startY="155.0" stroke="RED" strokeWidth="2.5" />
+            <HBox fx:id="hbB1" alignment="CENTER" prefHeight="71.0" prefWidth="900.0">
+               <children>
+                  <Button fx:id="btn1" mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" style="-fx-background-radius: 75;" />
+               </children>
+            </HBox>
+            <HBox fx:id="hbB23" alignment="CENTER" layoutY="140.0" prefHeight="71.0" prefWidth="900.0" spacing="135.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" style="-fx-background-radius: 75;" />
+                  <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" style="-fx-background-radius: 75;" />
+                  <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" style="-fx-background-radius: 75;" />
+                  <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" style="-fx-background-radius: 75;" />
+               </children>
+            </HBox>
+            <HBox fx:id="hbB24" alignment="CENTER" layoutY="220.0" prefHeight="79.0" prefWidth="900.0" spacing="40.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" style="-fx-background-radius: 75;" />
+                  <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" style="-fx-background-radius: 75;" />
+                  <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" style="-fx-background-radius: 75;" />
+                  <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" style="-fx-background-radius: 75;" />
+                  <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" style="-fx-background-radius: 75;" />
+                  <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" style="-fx-background-radius: 75;" />
+                  <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" style="-fx-background-radius: 75;" />
+                  <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" style="-fx-background-radius: 75;" />
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+   </children>
+</VBox>

@@ -1,0 +1,10 @@
+31,¿Cuál es la hormona sexual masculina más importante?,Ciencia,Testosterona,Adrenalina,Cortisol,Estrógeno,0
+32,¿Gracias a cuál de tus cinco sentidos puedes descodificar vibraciones en el aire?,Ciencia,Tacto,Vista,Oido,Gusto,2
+33,¿De qué sustrato se nutre principalmente el cerebro?,Ciencia,Glucosa,Glucagon,Tezontle,Perlita,0
+34,¿Cuál de las siguientes enfermedades ataca al higado? ,Ciencia,Hepatitis,Diabetes,Artrisis,Cifonela,0
+35,¿Cómo tomarías la sustancia alucinógena natural llamada ayahuasca?,Ciencia,Esnifada,Inhalada,Inyectada,Ingerida,3
+36,¿Qué órgano del cuerpo humano produce la bilis?,Ciencia,Hígado,Páncreas,Intestino,Riñon,0
+37,¿De qué color es la sange de los peces?,Ciencia,Verde,Marrón,Rojo,Azul,2
+38,¿De donde de saca la sacarina?,Ciencia,Azúcar,Aceite,Carbón,Azufre,2
+39,¿Dónde vive el delfín rosado?,Ciencia,Brasil,Oceanía,Montevideo,San Carlo,0
+40,¿Qué es un equino?,Ciencia,Vaca,Antílope,Oveja,Caballo,3

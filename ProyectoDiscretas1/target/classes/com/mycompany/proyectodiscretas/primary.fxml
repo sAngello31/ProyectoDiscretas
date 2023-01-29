@@ -3,16 +3,18 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyectodiscretas.PrimaryController">
+<VBox alignment="CENTER" prefHeight="500.0" prefWidth="900.0" spacing="20.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyectodiscretas.PrimaryController">
    <children>
       <Label text="Árbol Discreto">
          <font>
-            <Font name="System Bold" size="23.0" />
+            <Font name="System Bold" size="26.0" />
          </font></Label>
       <Button fx:id="primaryButton" maxHeight="50.0" maxWidth="500.0" minHeight="50.0" onAction="#switchToSecondary" text="Jugar" />
+      <ImageView fx:id="imgvarbol" fitHeight="317.0" fitWidth="307.0" pickOnBounds="true" preserveRatio="true" />
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

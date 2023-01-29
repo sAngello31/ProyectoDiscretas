@@ -1,19 +1,25 @@
 package com.mycompany.proyectodiscretas;
 
 import Modelo.Jugador;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class SecondaryController {
+public class SecondaryController implements Initializable {
     
     int jugadores = 2;
     @FXML
@@ -24,7 +30,8 @@ public class SecondaryController {
     private TextField jugador1;
     @FXML
     private TextField jugador2;
-
+    @FXML
+    ImageView imgvpersonas;
 
     
     @FXML
@@ -54,5 +61,15 @@ public class SecondaryController {
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        try ( FileInputStream input = new FileInputStream("Popup/" + "personitas.png")) {
+            Image image = new Image(input, 173, 147, false, false);
+            imgvpersonas.setImage(image);
+        } catch (IOException e) {
+            System.out.println("Archivo no encontrado");
+        }
     }
 }

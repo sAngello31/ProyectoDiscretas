@@ -149,11 +149,11 @@ public class PreguntaController1 implements Initializable {
 
         FXMLLoader fxml = new FXMLLoader(App.class.getResource("PreguntaMostrada.fxml"));
         PreguntaMostradaController ct = new PreguntaMostradaController();
+        ct.tempo=new Temporizador(obtenerArbolJugador(),p1);
         fxml.setController(ct);
         VBox root = (VBox) fxml.load();
 
         ct.llenarDatos(p1);
-        PreguntaMostradaController.tempo=new Temporizador(obtenerArbolJugador(),p1);
         ct.mostrarPreguntas(p1, obtenerArbolJugador());
         App.changeRoot(root);
     }
@@ -194,13 +194,19 @@ public class PreguntaController1 implements Initializable {
         return retorno;
     }
 
-    public static void bloquearBotones() {
+    public static boolean bloquearBotones() {
+        boolean todosBloqueados=true;
         for (int i = 0; i < 14; i++) {
             if (!arbolJugador2.arr[i].isDisponible()) {
                 botoneseste.get(i).setDisable(true);
             } else {
                 botoneseste.get(i).setDisable(false);
             }
+            todosBloqueados=todosBloqueados&&botoneseste.get(i).isDisable();
         }
+        return todosBloqueados;
+    }
+    public static void borrarEventHandler(int indice){
+        botoneseste.get(indice).setOnAction(null);
     }
 }

@@ -29,8 +29,8 @@ public class Temporizador extends Thread {
     @FXML
     public Label e;
 
-    public Temporizador(VBox e, Pregunta p) {
-        this.root = e;
+    public Temporizador(VBox r, Pregunta p) {
+        this.root = r;
         this.p = p;
     }
 
@@ -70,6 +70,11 @@ public class Temporizador extends Thread {
             PreguntaMostradaController.j1 = root;
             PreguntaController.cambiarEstadoPreguntas(p, false);
             PreguntaController.bloquearBotones();
+            try {
+                cambiarScene2 ();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         } else if (App.turno == 3) {
             PreguntaMostradaController.j2 = root;
             PreguntaController1.cambiarEstadoPreguntas(p, false);
@@ -78,14 +83,32 @@ public class Temporizador extends Thread {
         } else if (App.turno % 2 == 1) {
             PreguntaMostradaController.j2 = root;
             PreguntaController1.cambiarEstadoPreguntas(p, false);
-            PreguntaController1.bloquearBotones();
-            App.changeRoot(PreguntaMostradaController.j1);
-
+            boolean todosBloqueados=PreguntaController1.bloquearBotones();
+            if(todosBloqueados){
+                    mostrarGanador(App.listaJugadores.get(0));
+            }else{
+                App.changeRoot(PreguntaMostradaController.j1);
+            }
         } else if (App.turno % 2 == 0) {
             PreguntaMostradaController.j1 = root;
             PreguntaController.cambiarEstadoPreguntas(p, false);
-            PreguntaController.bloquearBotones();
-            App.changeRoot(PreguntaMostradaController.j2);
+            boolean todosBloqueados=PreguntaController.bloquearBotones();
+            if(todosBloqueados){
+                    mostrarGanador(App.listaJugadores.get(1));
+            }else{
+                App.changeRoot(PreguntaMostradaController.j2);
+            }
+        }
+    }
+        private void cambiarScene2() throws IOException {
+        App.setRoot("Pregunta_1");
+    }
+            public void mostrarGanador(Jugador j) {
+        GanadorController.ganador = j;
+        try {
+            App.setRoot("Ganador");
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 }

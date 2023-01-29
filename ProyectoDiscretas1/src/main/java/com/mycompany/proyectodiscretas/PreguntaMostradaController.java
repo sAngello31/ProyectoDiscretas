@@ -40,14 +40,14 @@ public class PreguntaMostradaController implements Initializable {
     private Label lblPregunta;
     @FXML
     private GridPane Angello;
-    public static Temporizador tempo;
-    
+    public Temporizador tempo;
+
     public static VBox j1;
     public static VBox j2;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        tempo.e=lblTemporizador;
+        tempo.e = lblTemporizador;
         tempo.setDaemon(true);
         tempo.start();
     }
@@ -62,7 +62,7 @@ public class PreguntaMostradaController implements Initializable {
         lblPregunta.setText(p.getEnunciado());
     }
 
-    public void mostrarPreguntas(Pregunta p,VBox root) {
+    public void mostrarPreguntas(Pregunta p, VBox root) {
 //        Pregunta preguntaAMostrar;
 //        if (turno % 2 == 0) {
 //            preguntaAMostrar=p2;
@@ -75,15 +75,15 @@ public class PreguntaMostradaController implements Initializable {
             Button bt = (Button) node;
             bt.setText(p.getOPCIONES().get(contador));
             //Agregar el evento
-            bt.setOnAction(e -> verificarRespuesta(p, bt,root));
+            bt.setOnAction(e -> verificarRespuesta(p, bt, root));
             contador++;
         }
     }
 
-    private void verificarRespuesta(Pregunta p, Button bt,VBox root) {
+    private void verificarRespuesta(Pregunta p, Button bt, VBox root) {
         boolean correcto1;
         if (bt.getText().equals(p.getOPCIONES().get(p.getRespuesta()))) {
-            correcto1=true;
+            correcto1 = true;
             tempo.setIniciar(false);
             bt.setStyle("-fx-background-color: green; -fx-text-fill: white");
 //            Alert correcto = new Alert(Alert.AlertType.ERROR);
@@ -91,43 +91,45 @@ public class PreguntaMostradaController implements Initializable {
 //            correcto.setTitle("RESPUESTA CORRECTA");
 //            correcto.showAndWait();
 //            System.out.println("RESPUESTA CORRECTA");
-            VBox popup=new VBox();
-            Label respuesta=new Label("RESPUESTA CORRECTA");
-            ImageView imgv=new ImageView();
-            Label segundos=new Label();
-            try(FileInputStream input=new FileInputStream("Popup/"+"acertaste.gif")){
-                Image image=new Image(input,200,150,false,false);
+            VBox popup = new VBox();
+            Label respuesta = new Label("RESPUESTA CORRECTA");
+            ImageView imgv = new ImageView();
+            Label segundos = new Label();
+            try ( FileInputStream input = new FileInputStream("Popup/" + "acertaste.gif")) {
+                Image image = new Image(input, 200, 150, false, false);
                 imgv.setImage(image);
-            }catch(IOException e){
-                System.out.println("Archivo no encontrado"); 
+            } catch (IOException e) {
+                System.out.println("Archivo no encontrado");
             }
 
             respuesta.setStyle("-fx-font-weight: bold; -fx-font-size: 29");
 //            respuesta.setStyle("-fx-font-size: 29");   
             popup.setSpacing(20);
-            popup.getChildren().addAll(respuesta,imgv,segundos);
+            popup.getChildren().addAll(respuesta, imgv, segundos);
             popup.setStyle("-fx-background-color: #99ff33");
             popup.setAlignment(Pos.CENTER);
             segundos.setStyle("-fx-font-size: 14");
-            
-            Scene scene2=new Scene(popup,360,294);
-            Stage stage2=new Stage();
+
+            Scene scene2 = new Scene(popup, 360, 294);
+            Stage stage2 = new Stage();
             stage2.setScene(scene2);
             stage2.show();
-            
+
             Thread t2 = new Thread(new Runnable() {
-                int i=6;
+                int i = 6;
+
                 @Override
                 public void run() {
-                    while(i>=0){
+                    while (i >= 0) {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
-                                segundos.setText("Se cierra en "+i+" segundos");
-                                if(i==0){
+                                segundos.setText("Se cierra en " + i + " segundos");
+                                if (i == 0) {
                                     stage2.close();
-                                }else{
-
+                                    AngelloyMargarita(root,p,correcto1);
+                                } else {
+                                    
                                 }
                             }
                         });
@@ -137,14 +139,14 @@ public class PreguntaMostradaController implements Initializable {
                             Thread.sleep(1000);
                         } catch (InterruptedException ex) {
                             ex.printStackTrace();
-                        }   
-                    }              
+                        }
+                    }
                 }
             });
 
             t2.setDaemon(true);
             t2.start();
- 
+
             //Cambio de Ventana y Turno 
             App.turno++;
 
@@ -153,9 +155,8 @@ public class PreguntaMostradaController implements Initializable {
 //            } catch (IOException e) {
 //                System.out.println(e.getMessage());
 //            }
-
         } else {
-            correcto1=false;
+            correcto1 = false;
             tempo.setIniciar(false);
             bt.setStyle("-fx-background-color: red; -fx-text-fill: white");
 //            Alert incorrecto = new Alert(Alert.AlertType.ERROR);
@@ -164,42 +165,44 @@ public class PreguntaMostradaController implements Initializable {
 //            incorrecto.showAndWait();
 //            System.out.println("PUTAAAAAAAAAAAAAAA");
 
-            VBox popup=new VBox();
-            Label respuesta=new Label("RESPUESTA INCORRECTA");
-            ImageView imgv=new ImageView();
-            Label segundos=new Label();
-            try(FileInputStream input=new FileInputStream("Popup/"+"perdiste.gif")){
-                Image image=new Image(input,200,150,false,false);
+            VBox popup = new VBox();
+            Label respuesta = new Label("RESPUESTA INCORRECTA");
+            ImageView imgv = new ImageView();
+            Label segundos = new Label();
+            try ( FileInputStream input = new FileInputStream("Popup/" + "perdiste.gif")) {
+                Image image = new Image(input, 200, 150, false, false);
                 imgv.setImage(image);
-            }catch(IOException e){
-                System.out.println("Archivo no encontrado"); 
+            } catch (IOException e) {
+                System.out.println("Archivo no encontrado");
             }
-            
+
             respuesta.setStyle("-fx-font-weight: bold; -fx-font-size: 29");
 //            respuesta.setStyle("-fx-font-size: 29");
             popup.setSpacing(20);
-            popup.getChildren().addAll(respuesta,imgv,segundos);
+            popup.getChildren().addAll(respuesta, imgv, segundos);
             popup.setStyle("-fx-background-color: #f3464a");
             popup.setAlignment(Pos.CENTER);
             segundos.setStyle("-fx-font-size: 14");
-            
-            Scene scene2=new Scene(popup,360,294);
-            Stage stage2=new Stage();
+
+            Scene scene2 = new Scene(popup, 360, 294);
+            Stage stage2 = new Stage();
             stage2.setScene(scene2);
             stage2.show();
-            
+
             Thread t2 = new Thread(new Runnable() {
-                int i=6;
+                int i = 6;
+
                 @Override
                 public void run() {
-                    while(i>=0){
+                    while (i >= 0) {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
-                                segundos.setText("Se cierra en "+i+" segundos");
-                                if(i==0){
+                                segundos.setText("Se cierra en " + i + " segundos");
+                                if (i == 0) {
                                     stage2.close();
-                                }else{
+                                    AngelloyMargarita(root,p,correcto1);
+                                } else {
 
                                 }
                             }
@@ -210,16 +213,13 @@ public class PreguntaMostradaController implements Initializable {
                             Thread.sleep(1000);
                         } catch (InterruptedException ex) {
                             ex.printStackTrace();
-                        }   
-                    }              
+                        }
+                    }
                 }
             });
 
             t2.setDaemon(true);
             t2.start();
-
-
-
 
             //Cambio de Ventana y Turno
             App.turno++;
@@ -230,48 +230,62 @@ public class PreguntaMostradaController implements Initializable {
 //                System.out.println(e.getMessage());
 //            }  
         }
-        if (App.turno == 2) {
-            j1=root;
-            PreguntaController.cambiarEstadoPreguntas(p, correcto1);
+
+    }
+    public void AngelloyMargarita(VBox root,Pregunta p,boolean correcto1){
+                if (App.turno == 2) {
+            j1 = root;
+            int indicePregunta =PreguntaController.cambiarEstadoPreguntas(p, correcto1);
             PreguntaController.bloquearBotones();
+            PreguntaController.borrarEventHandler(indicePregunta);
             try {
                 cambiarScene2();
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
-        }else if(App.turno == 3){
-            j2=root;
-            PreguntaController1.cambiarEstadoPreguntas(p, correcto1);
+        } else if (App.turno == 3) {
+            j2 = root;
+            int indicePregunta =PreguntaController1.cambiarEstadoPreguntas(p, correcto1);
             PreguntaController1.bloquearBotones();
+            PreguntaController1.borrarEventHandler(indicePregunta);
             App.changeRoot(j1);
-        }else if(App.turno%2==1){
-            j2=root;
-            int indicePregunta=PreguntaController1.cambiarEstadoPreguntas(p, correcto1);
-            if(indicePregunta>=6&&correcto1){
+        } else if (App.turno % 2 == 1) {
+            j2 = root;
+            int indicePregunta = PreguntaController1.cambiarEstadoPreguntas(p, correcto1);
+            PreguntaController1.borrarEventHandler(indicePregunta);
+            if (indicePregunta >= 6 && correcto1) {
                 mostrarGanador(App.listaJugadores.get(1));
-            }else{
-                PreguntaController1.bloquearBotones();
-                App.changeRoot(j1);
+            } else {
+                boolean todosBloqueados=PreguntaController1.bloquearBotones();
+                if(todosBloqueados){
+                    mostrarGanador(App.listaJugadores.get(0));
+                }else{
+                    App.changeRoot(j1);
+                }
             }
-        }else if(App.turno%2==0){
-            j1=root;
-            int indicePregunta=PreguntaController.cambiarEstadoPreguntas(p, correcto1);
-            if(indicePregunta>=6&&correcto1){
+        } else if (App.turno % 2 == 0) {
+            j1 = root;
+            int indicePregunta = PreguntaController.cambiarEstadoPreguntas(p, correcto1);
+            PreguntaController.borrarEventHandler(indicePregunta);
+            if (indicePregunta >= 6 && correcto1) {
                 mostrarGanador(App.listaJugadores.get(0));
-            }else{
-                PreguntaController.bloquearBotones();
-                App.changeRoot(j2);
+            } else {
+                boolean todosBloqueados=PreguntaController.bloquearBotones();
+                if(todosBloqueados){
+                    mostrarGanador(App.listaJugadores.get(1));
+                }else{
+                    App.changeRoot(j2);
+                }
             }
         }
     }
-    public void mostrarGanador(Jugador j){
-        GanadorController.ganador=j;
+    public void mostrarGanador(Jugador j) {
+        GanadorController.ganador = j;
         try {
             App.setRoot("Ganador");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        
     }
 //    public void temporizadorFinalizado(Temporizador t) {
 //        VBox root;
@@ -321,6 +335,7 @@ public class PreguntaMostradaController implements Initializable {
 //        App.setRoot("Pregunta");
 //    }
 //    
+
     private void cambiarScene2() throws IOException {
         App.setRoot("Pregunta_1");
     }
@@ -368,5 +383,4 @@ public class PreguntaMostradaController implements Initializable {
 //        }
 //
 //    }
-
 }

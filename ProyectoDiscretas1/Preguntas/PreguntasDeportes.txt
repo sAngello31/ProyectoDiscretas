@@ -1,0 +1,10 @@
+51,¿Cuántos Km de distancia mide una maratón?,Deportes,41.85 km,42.16 km,43.77 km,43.45 km,1
+52,¿Qué deporte tiene un equipo llamado foil?,Deportes,polo,golf,esgrima,boxeo,2
+53,¿Cuántos puntos vale un tiro libre en baloncesto?,Deportes,1 punto,2 puntos,3 puntos,4 puntos,0
+54,¿Cada cuántos años se realizan los Juegos Olímpicos?,Deportes,Cada 4 años,Cada 3 años,Cada 2 años,Todos los años,0
+55,¿Qué parte de tu cuerpo no debe tocar el balón en el fútbol?,Deportes,cabeza,pierna,mano,espalda,2
+56,¿Cuál de los siguientes deportes no usa una pelota?,Deportes,golf,tenis,hockey,polo,2
+57,¿Cuántos jugadores hay en un equipo de béisbol?,Deportes,10 jugaores,9 jugadores,8 jugadores,7 jugadores,0
+58,¿Cómo llamas a la cancha de fútbol?,Deportes,terreno de juego,corte,campo,bol,0
+59,En baloncesto;el jugador que trae la pelota al otro lado de la cancha y corre la ofensiva se llama...,Deportes,base,alero,delantero,pivot,0
+60,¿Cuál es el significado de NBA?,Deportes,Administración Nacional de Canasta,Administración Nacional de Baloncesto,Asociación Nacional de Basquetbol,Administración Nacional de Canasta,2

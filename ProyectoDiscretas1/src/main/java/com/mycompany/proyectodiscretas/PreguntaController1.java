@@ -8,6 +8,7 @@ import Modelo.ArbolBinario;
 import Modelo.Jugador;
 import Modelo.Pregunta;
 import Modelo.Temporizador;
+import static com.mycompany.proyectodiscretas.PreguntaController.arbolJugador1;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayDeque;
@@ -149,10 +150,10 @@ public class PreguntaController1 implements Initializable {
 
         FXMLLoader fxml = new FXMLLoader(App.class.getResource("PreguntaMostrada.fxml"));
         PreguntaMostradaController ct = new PreguntaMostradaController();
-        ct.tempo=new Temporizador(obtenerArbolJugador(),p1);
+        ct.tempo = new Temporizador(obtenerArbolJugador(), p1,arbolJugador2.arr);
+        ct.preguntasref=arbolJugador2.arr;
         fxml.setController(ct);
         VBox root = (VBox) fxml.load();
-
         ct.llenarDatos(p1);
         ct.mostrarPreguntas(p1, obtenerArbolJugador());
         App.changeRoot(root);
@@ -161,7 +162,7 @@ public class PreguntaController1 implements Initializable {
     public static int cambiarEstadoPreguntas(Pregunta p, boolean desbloquear) {
         Pregunta[] preguntas = arbolJugador2.arr;
         int indice = -1;
-        int retorno=-1;
+        int retorno = -1;
         for (int i = 0; i < preguntas.length; i++) {
             System.out.println("while");
             if (p.equals(preguntas[i])) {
@@ -169,12 +170,12 @@ public class PreguntaController1 implements Initializable {
             }
         }
         if (indice >= 0) {
-            retorno=indice;
+            retorno = indice;
             if (desbloquear) {
                 preguntas[indice].setDisponible(desbloquear);
-                if(2 * (indice + 1) + 1 < 14){
+                if (2 * (indice + 1) + 1 < 14) {
                     preguntas[(2 * (indice + 1))].setDisponible(desbloquear);
-                    preguntas[(2 * (indice + 1))+1].setDisponible(desbloquear);
+                    preguntas[(2 * (indice + 1)) + 1].setDisponible(desbloquear);
                 }
             } else {
                 Deque<Integer> pila = new ArrayDeque<>();
@@ -195,18 +196,43 @@ public class PreguntaController1 implements Initializable {
     }
 
     public static boolean bloquearBotones() {
-        boolean todosBloqueados=true;
+        boolean todosBloqueados = true;
         for (int i = 0; i < 14; i++) {
             if (!arbolJugador2.arr[i].isDisponible()) {
                 botoneseste.get(i).setDisable(true);
             } else {
                 botoneseste.get(i).setDisable(false);
             }
-            todosBloqueados=todosBloqueados&&botoneseste.get(i).isDisable();
+            todosBloqueados = todosBloqueados && botoneseste.get(i).isDisable();
         }
         return todosBloqueados;
     }
-    public static void borrarEventHandler(int indice){
+
+    public static void borrarEventHandler(int indice) {
         botoneseste.get(indice).setOnAction(null);
+    }
+
+
+        public static void cambiarRespondida(Pregunta p) {
+        Pregunta[] preguntas = arbolJugador2.arr;
+        int indice = -1;
+        for (int i = 0; i < preguntas.length; i++) {
+            if (p.equals(preguntas[i])) {
+                indice = i;
+            }
+        }
+        if (indice >= 0) {
+            Deque<Integer> pila = new ArrayDeque<>();
+            pila.push(indice);
+            while (!pila.isEmpty()) {
+                System.out.println("while");
+                Integer ref = pila.pop();
+                preguntas[ref].setRespondida(true);
+                if (2 * (ref + 1) + 1 < 14) {
+                    pila.push((2 * (ref + 1)));
+                    pila.push((2 * (ref + 1)) + 1);
+                }
+            }
+        }
     }
 }

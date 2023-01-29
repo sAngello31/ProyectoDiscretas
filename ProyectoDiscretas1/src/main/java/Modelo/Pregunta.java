@@ -18,6 +18,7 @@ public class Pregunta {
     private final ArrayList<String> OPCIONES;
     private int respuesta;
     private boolean disponible;
+    private boolean respondida;
 
     public Pregunta(String id, String enunciado, Categorias categoria, ArrayList<String> OPCIONES, int respuesta) {
         this.id = id;
@@ -26,6 +27,7 @@ public class Pregunta {
         this.OPCIONES = OPCIONES;
         this.respuesta = respuesta;
         disponible=false;
+        respondida=false;
     }
     public Pregunta(){
         this.OPCIONES=null;
@@ -94,6 +96,14 @@ public class Pregunta {
         }
         final Pregunta other = (Pregunta) obj;
         return Objects.equals(this.id, other.id);
+    }
+
+    public boolean isRespondida() {
+        return respondida;
+    }
+
+    public void setRespondida(boolean respondida) {
+        this.respondida = respondida;
     }
     
 }

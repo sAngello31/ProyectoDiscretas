@@ -1,5 +1,6 @@
 com\mycompany\proyectodiscretas\App.class
 com\mycompany\proyectodiscretas\PreguntaController.class
+com\mycompany\proyectodiscretas\PreguntaMostradaController$1.class
 module-info.class
 com\mycompany\proyectodiscretas\SecondaryController.class
 Modelo\Temporizador.class
@@ -7,7 +8,11 @@ Modelo\ArbolBinario.class
 Modelo\Categorias.class
 Modelo\Pregunta.class
 com\mycompany\proyectodiscretas\PreguntaRealizadaController.class
+com\mycompany\proyectodiscretas\GanadorController.class
 com\mycompany\proyectodiscretas\PreguntaController1.class
 Modelo\Jugador.class
+com\mycompany\proyectodiscretas\PreguntaMostradaController$1$1.class
+com\mycompany\proyectodiscretas\PreguntaMostradaController$2$1.class
+com\mycompany\proyectodiscretas\PreguntaMostradaController$2.class
 com\mycompany\proyectodiscretas\PrimaryController.class
 com\mycompany\proyectodiscretas\PreguntaMostradaController.class

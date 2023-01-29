@@ -26,12 +26,14 @@ public class Temporizador extends Thread {
     public int segundos = 15;
     public VBox root;
     public Pregunta p;
+    public Pregunta[] arr;
     @FXML
     public Label e;
 
-    public Temporizador(VBox r, Pregunta p) {
+    public Temporizador(VBox r, Pregunta p,Pregunta[] ar) {
         this.root = r;
         this.p = p;
+        arr=ar;
     }
 
     public void setIniciar(boolean iniciar) {
@@ -54,7 +56,6 @@ public class Temporizador extends Thread {
         segundos--;
         if (segundos != 0) {
             Platform.runLater(() -> e.setText("Tiempo: " + segundos));
-            System.out.println(segundos);
         } else {
             App.turno++;
             iniciar = false;
@@ -69,6 +70,7 @@ public class Temporizador extends Thread {
         if (App.turno == 2) {
             PreguntaMostradaController.j1 = root;
             PreguntaController.cambiarEstadoPreguntas(p, false);
+            PreguntaController.cambiarRespondida(p);
             PreguntaController.bloquearBotones();
             try {
                 cambiarScene2 ();
@@ -78,13 +80,15 @@ public class Temporizador extends Thread {
         } else if (App.turno == 3) {
             PreguntaMostradaController.j2 = root;
             PreguntaController1.cambiarEstadoPreguntas(p, false);
+            PreguntaController1.cambiarRespondida(p);
             PreguntaController1.bloquearBotones();
             App.changeRoot(PreguntaMostradaController.j1);
         } else if (App.turno % 2 == 1) {
             PreguntaMostradaController.j2 = root;
             PreguntaController1.cambiarEstadoPreguntas(p, false);
-            boolean todosBloqueados=PreguntaController1.bloquearBotones();
-            if(todosBloqueados){
+            PreguntaController1.cambiarRespondida(p);
+            PreguntaController1.bloquearBotones();
+            if(PreguntaMostradaController.todasRespondidas(arr)){
                     mostrarGanador(App.listaJugadores.get(0));
             }else{
                 App.changeRoot(PreguntaMostradaController.j1);
@@ -92,8 +96,9 @@ public class Temporizador extends Thread {
         } else if (App.turno % 2 == 0) {
             PreguntaMostradaController.j1 = root;
             PreguntaController.cambiarEstadoPreguntas(p, false);
-            boolean todosBloqueados=PreguntaController.bloquearBotones();
-            if(todosBloqueados){
+            PreguntaController.cambiarRespondida(p);
+            PreguntaController.bloquearBotones();
+            if(PreguntaMostradaController.todasRespondidas(arr)){
                     mostrarGanador(App.listaJugadores.get(1));
             }else{
                 App.changeRoot(PreguntaMostradaController.j2);

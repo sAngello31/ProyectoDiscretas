@@ -65,7 +65,7 @@ public class PreguntaController implements Initializable {
     private static ArrayList<Button> botones;
     private Jugador jugador1;
     public static ArbolBinario<Pregunta> arbolJugador1;
-
+    public Pregunta[] preguntas;
     public static Pane escenaJ1;
 
     /**
@@ -155,8 +155,9 @@ public class PreguntaController implements Initializable {
 
         FXMLLoader fxml = new FXMLLoader(App.class.getResource("PreguntaMostrada.fxml"));
         PreguntaMostradaController ct = new PreguntaMostradaController();
-        ct.tempo=new Temporizador(obtenerArbolJugador(),p1);
+        ct.tempo=new Temporizador(obtenerArbolJugador(),p1,arbolJugador1.arr);
         fxml.setController(ct);
+        ct.preguntasref=arbolJugador1.arr;
         VBox root = (VBox) fxml.load();
 
         ct.llenarDatos(p1);
@@ -213,5 +214,36 @@ public class PreguntaController implements Initializable {
     }
     public static void borrarEventHandler(int indice){
         botones.get(indice).setOnAction(null);
+    }
+    public static boolean todasRespondidas(){
+        Pregunta[] preguntas = arbolJugador1.arr;
+        boolean retorno=true;
+        for(int i=0;i<preguntas.length;i++){
+            System.out.println(preguntas[i].getId());
+            retorno=retorno&&preguntas[i].isRespondida();
+        }
+        return retorno;
+    }
+        public static void cambiarRespondida(Pregunta p) {
+        Pregunta[] preguntas = arbolJugador1.arr;
+        int indice = -1;
+        for (int i = 0; i < preguntas.length; i++) {
+            if (p.equals(preguntas[i])) {
+                indice = i;
+            }
+        }
+        if (indice >= 0) {
+            Deque<Integer> pila = new ArrayDeque<>();
+            pila.push(indice);
+            while (!pila.isEmpty()) {
+                System.out.println("while");
+                Integer ref = pila.pop();
+                preguntas[ref].setRespondida(true);
+                if (2 * (ref + 1) + 1 < 14) {
+                    pila.push((2 * (ref + 1)));
+                    pila.push((2 * (ref + 1)) + 1);
+                }
+            }
+        }
     }
 }

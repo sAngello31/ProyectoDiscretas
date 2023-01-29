@@ -7,9 +7,12 @@ package com.mycompany.proyectodiscretas;
 import Modelo.Jugador;
 import Modelo.Pregunta;
 import Modelo.Temporizador;
+import static com.mycompany.proyectodiscretas.PreguntaController.arbolJugador1;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -41,7 +44,7 @@ public class PreguntaMostradaController implements Initializable {
     @FXML
     private GridPane Angello;
     public Temporizador tempo;
-
+    public Pregunta[] preguntasref;
     public static VBox j1;
     public static VBox j2;
 
@@ -82,6 +85,7 @@ public class PreguntaMostradaController implements Initializable {
 
     private void verificarRespuesta(Pregunta p, Button bt, VBox root) {
         boolean correcto1;
+        p.setRespondida(true);
         if (bt.getText().equals(p.getOPCIONES().get(p.getRespuesta()))) {
             correcto1 = true;
             tempo.setIniciar(false);
@@ -127,9 +131,9 @@ public class PreguntaMostradaController implements Initializable {
                                 segundos.setText("Se cierra en " + i + " segundos");
                                 if (i == 0) {
                                     stage2.close();
-                                    AngelloyMargarita(root,p,correcto1);
+                                    AngelloyMargarita(root, p, correcto1);
                                 } else {
-                                    
+
                                 }
                             }
                         });
@@ -156,6 +160,11 @@ public class PreguntaMostradaController implements Initializable {
 //                System.out.println(e.getMessage());
 //            }
         } else {
+            if (App.turno % 2 == 0) {
+                PreguntaController1.cambiarRespondida(p);
+            } else {
+                PreguntaController.cambiarRespondida(p);
+            }
             correcto1 = false;
             tempo.setIniciar(false);
             bt.setStyle("-fx-background-color: red; -fx-text-fill: white");
@@ -201,7 +210,7 @@ public class PreguntaMostradaController implements Initializable {
                                 segundos.setText("Se cierra en " + i + " segundos");
                                 if (i == 0) {
                                     stage2.close();
-                                    AngelloyMargarita(root,p,correcto1);
+                                    AngelloyMargarita(root, p, correcto1);
                                 } else {
 
                                 }
@@ -232,10 +241,11 @@ public class PreguntaMostradaController implements Initializable {
         }
 
     }
-    public void AngelloyMargarita(VBox root,Pregunta p,boolean correcto1){
-                if (App.turno == 2) {
+
+    public void AngelloyMargarita(VBox root, Pregunta p, boolean correcto1) {
+        if (App.turno == 2) {
             j1 = root;
-            int indicePregunta =PreguntaController.cambiarEstadoPreguntas(p, correcto1);
+            int indicePregunta = PreguntaController.cambiarEstadoPreguntas(p, correcto1);
             PreguntaController.bloquearBotones();
             PreguntaController.borrarEventHandler(indicePregunta);
             try {
@@ -245,40 +255,43 @@ public class PreguntaMostradaController implements Initializable {
             }
         } else if (App.turno == 3) {
             j2 = root;
-            int indicePregunta =PreguntaController1.cambiarEstadoPreguntas(p, correcto1);
+            int indicePregunta = PreguntaController1.cambiarEstadoPreguntas(p, correcto1);
             PreguntaController1.bloquearBotones();
             PreguntaController1.borrarEventHandler(indicePregunta);
             App.changeRoot(j1);
         } else if (App.turno % 2 == 1) {
             j2 = root;
+            boolean todasRespondidas = todasRespondidas(preguntasref);
             int indicePregunta = PreguntaController1.cambiarEstadoPreguntas(p, correcto1);
             PreguntaController1.borrarEventHandler(indicePregunta);
             if (indicePregunta >= 6 && correcto1) {
                 mostrarGanador(App.listaJugadores.get(1));
             } else {
-                boolean todosBloqueados=PreguntaController1.bloquearBotones();
-                if(todosBloqueados){
+                PreguntaController1.bloquearBotones();
+                if (todasRespondidas) {
                     mostrarGanador(App.listaJugadores.get(0));
-                }else{
+                } else {
                     App.changeRoot(j1);
                 }
             }
         } else if (App.turno % 2 == 0) {
             j1 = root;
+            boolean todasRespondidas = todasRespondidas(preguntasref);
             int indicePregunta = PreguntaController.cambiarEstadoPreguntas(p, correcto1);
             PreguntaController.borrarEventHandler(indicePregunta);
             if (indicePregunta >= 6 && correcto1) {
                 mostrarGanador(App.listaJugadores.get(0));
             } else {
-                boolean todosBloqueados=PreguntaController.bloquearBotones();
-                if(todosBloqueados){
+                PreguntaController.bloquearBotones();
+                if (todasRespondidas) {
                     mostrarGanador(App.listaJugadores.get(1));
-                }else{
+                } else {
                     App.changeRoot(j2);
                 }
             }
         }
     }
+
     public void mostrarGanador(Jugador j) {
         GanadorController.ganador = j;
         try {
@@ -338,6 +351,16 @@ public class PreguntaMostradaController implements Initializable {
 
     private void cambiarScene2() throws IOException {
         App.setRoot("Pregunta_1");
+    }
+
+    public static boolean todasRespondidas(Pregunta[]preguntas) {
+        boolean retorno = true;
+        System.out.println(preguntas.length);
+        for (int i = 0; i < 14; i++) {
+            System.out.println(preguntas[i].getId());
+            retorno = retorno && preguntas[i].isRespondida();
+        }
+        return retorno;
     }
 
     //Hilo
